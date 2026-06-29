@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sfax Export — Export Logistics for Tunisian Producers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:        #1a1612;
+    --ink-2:      #5c5650;
+    --ink-3:      #9e9890;
+    --bg:         #f7f5f0;
+    --bg-card:    #ffffff;
+    --accent:     #1a5c3a;
+    --accent-lt:  #e8f2ec;
+    --accent-mid: #2d7a52;
+    --border:     #e2ddd6;
+    --radius:     10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 58px;
+  }
+
+  .nav-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: -0.3px;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    color: var(--ink-2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding-top: clamp(5rem, 10vw, 9rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    background: var(--accent-lt);
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.4rem, 5.5vw, 4rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 700px;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: var(--ink-2);
+    max-width: 520px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--accent-mid); transform: translateY(-1px); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--ink);
+    font-size: 15px;
+    font-weight: 500;
+    padding: 13px 24px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--ink-3); background: var(--bg-card); }
+
+  /* ── TRUST STRIP ── */
+  .trust-strip {
+    border-top: 1px solid var(--border);
+    padding-top: 1.75rem;
+    padding-bottom: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+
+  .trust-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--accent-lt);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent-mid);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1rem;
+    color: var(--ink-2);
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  /* ── WHAT I DO ── */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .service-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-lt);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .service-card h3 {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+
+  /* ── WHO IT'S FOR ── */
+  .for-section { background: var(--accent-lt); }
+  .for-section-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+  }
+
+  .for-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 2rem;
+  }
+
+  .for-item {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    border: 1px solid rgba(26,92,58,0.15);
+  }
+
+  .for-item strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+
+  .for-item span {
+    font-size: 13px;
+    color: var(--ink-2);
+  }
+
+  /* ── HOW IT WORKS ── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .steps::before {
+    content: '';
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: 40px;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .step {
+    display: flex;
+    gap: 1.25rem;
+    align-items: flex-start;
+    padding: 1.25rem 0;
+  }
+
+  .step-num {
+    width: 40px;
+    height: 40px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 500;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .step-body h3 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .step-body p  { font-size: 14px; color: var(--ink-2); line-height: 1.6; }
+
+  /* ── PRICING ── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+
+  .price-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .price-card.featured {
+    border-color: var(--accent);
+    border-width: 2px;
+    position: relative;
+  }
+
+  .featured-badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 12px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  .price-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .price-amount {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  .price-amount span {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-3);
+  }
+
+  .price-desc {
+    font-size: 14px;
+    color: var(--ink-2);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .price-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .price-items li {
+    font-size: 13px;
+    color: var(--ink-2);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .price-items li::before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: 500;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ── CONTACT ── */
+  .contact-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 640px) {
+    .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    nav .nav-links { display: none; }
+  }
+
+  .contact-info p {
+    font-size: 15px;
+    color: var(--ink-2);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .contact-channels {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: var(--ink-2);
+    text-decoration: none;
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: border-color 0.2s;
+  }
+
+  .channel:hover { border-color: var(--accent); color: var(--ink); }
+
+  .channel-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ch-email { background: #e8edf7; }
+  .ch-wa    { background: #e7f5ea; }
+
+  /* ── FORM ── */
+  .form-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-2);
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 10px 13px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--bg);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: var(--accent);
+    background: #fff;
+  }
+
+  textarea { resize: vertical; min-height: 90px; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 0.5rem;
+  }
+
+  .submit-btn:hover { background: var(--accent-mid); }
+
+  .form-note {
+    font-size: 12px;
+    color: var(--ink-3);
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: none;
+  }
+
+  footer p { font-size: 13px; color: var(--ink-3); }
+
+  .footer-brand {
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    color: var(--accent);
+  }
+
+  /* ── DIVIDER ── */
+  .section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    max-width: 960px;
+    margin: 0 auto;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">Sfax Export</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="hero-eyebrow">Export logistics · Sfax, Tunisia</span>
+  <h1>Your exports handled.<br><em>Without the headache.</em></h1>
+  <p class="hero-sub">I manage the paperwork, carrier booking, and customs coordination so you can focus on producing — not chasing documents.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn-primary">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      Get in touch
+    </a>
+    <a href="#pricing" class="btn-secondary">See pricing</a>
+  </div>
+
+  <div class="trust-strip" style="margin-top: 3.5rem;">
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="16" height="16" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"/></svg>
+      </div>
+      Everything done by WhatsApp &amp; email
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="16" height="16" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      </div>
+      EU &amp; Gulf market destinations
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">
+        <svg width="16" height="16" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7"/></svg>
+      </div>
+      All documents prepared &amp; reviewed
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SERVICES -->
+<section id="services">
+  <p class="section-label">What I do</p>
+  <h2 class="section-title">Everything between your factory and your buyer</h2>
+  <p class="section-desc">I handle the full export chain — from first document to final delivery confirmation — so nothing falls through the cracks.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7"/></svg>
+      </div>
+      <h3>Document preparation</h3>
+      <p>Commercial invoices, packing lists, certificates of origin, EUR1 certificates, and phytosanitary documents — all prepared correctly the first time.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <h3>Carrier booking</h3>
+      <p>I compare rates across Aramex, DHL, and local freight forwarders and book the best option for your shipment size, destination, and timeline.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Customs coordination</h3>
+      <p>I work with your customs broker and verify that all declarations match your documents — avoiding delays, fines, and returned shipments.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <h3>Shipment tracking</h3>
+      <p>You receive status updates at each stage — pickup, departure, customs clearance, delivery — without having to chase anyone yourself.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3>EU compliance</h3>
+      <p>Exporting to Europe? I verify HS codes, sanitary certificates, and buyer-specific requirements so your goods clear EU customs without issues.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">
+        <svg width="20" height="20" fill="none" stroke="#1a5c3a" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3>Cost negotiation</h3>
+      <p>I negotiate freight rates on your behalf. Pooling shipments across clients gives you volume pricing you couldn't get alone.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<div class="for-section">
+  <div class="for-section-inner">
+    <p class="section-label">Who it's for</p>
+    <h2 class="section-title">Made for Sfax producers who export</h2>
+    <p class="section-desc" style="margin-bottom:0;">If you make something in Sfax and sell it abroad, this service was built for you.</p>
+    <div class="for-grid">
+      <div class="for-item">
+        <strong>Olive oil producers</strong>
+        <span>Exporting to EU, Gulf, or North American buyers</span>
+      </div>
+      <div class="for-item">
+        <strong>Seafood exporters</strong>
+        <span>Octopus, shrimp, and fish with strict documentation needs</span>
+      </div>
+      <div class="for-item">
+        <strong>Textile manufacturers</strong>
+        <span>Clothing and fabric exporters to European brands</span>
+      </div>
+      <div class="for-item">
+        <strong>Food & agri producers</strong>
+        <span>Dates, harissa, preserves, and agricultural products</span>
+      </div>
+      <div class="for-item">
+        <strong>Crafts & ceramics</strong>
+        <span>Artisanal products sold to international retailers</span>
+      </div>
+      <div class="for-item">
+        <strong>Small factories</strong>
+        <span>Any manufacturer with 2–30 export shipments per year</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section>
+  <p class="section-label">How it works</p>
+  <h2 class="section-title">From message to delivered shipment</h2>
+  <p class="section-desc">The whole process runs by WhatsApp and email. No meetings, no calls.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Send me your shipment details</h3>
+        <p>Fill in the contact form below or message me directly on WhatsApp. Share your product, quantity, destination, and timeline.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>I prepare a quote within 24 hours</h3>
+        <p>You receive a clear breakdown of my service fee and the estimated carrier cost. No surprises.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>I handle all documents and booking</h3>
+        <p>Once confirmed, I prepare every document, coordinate with the carrier and customs broker, and keep you updated at each step.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Your buyer receives the shipment</h3>
+        <p>You get a delivery confirmation with all final paperwork archived and ready if you need them for accounting or future orders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- PRICING -->
+<section id="pricing">
+  <p class="section-label">Pricing</p>
+  <h2 class="section-title">Clear fees, no hidden costs</h2>
+  <p class="section-desc">Carrier costs are billed separately and at-cost — you see exactly what I charge vs. what the carrier charges.</p>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-name">Basic</div>
+      <div class="price-amount">80 TND <span>/ shipment</span></div>
+      <p class="price-desc">For straightforward shipments with standard documentation to familiar destinations.</p>
+      <ul class="price-items">
+        <li>Commercial invoice + packing list</li>
+        <li>Carrier booking &amp; coordination</li>
+        <li>Tracking updates by WhatsApp</li>
+        <li>1 destination country</li>
+      </ul>
+    </div>
+
+    <div class="price-card featured">
+      <div class="featured-badge">Most popular</div>
+      <div class="price-name">Standard</div>
+      <div class="price-amount">120 TND <span>/ shipment</span></div>
+      <p class="price-desc">Full-service coordination including customs documentation and EU compliance checks.</p>
+      <ul class="price-items">
+        <li>Everything in Basic</li>
+        <li>Certificate of origin / EUR1</li>
+        <li>Customs declaration review</li>
+        <li>Phytosanitary coordination</li>
+        <li>Priority response within 4 hours</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <div class="price-name">Monthly retainer</div>
+      <div class="price-amount">350 TND <span>/ month</span></div>
+      <p class="price-desc">For producers with 4+ shipments per month. Best value for regular exporters.</p>
+      <ul class="price-items">
+        <li>Up to 5 shipments included</li>
+        <li>Full Standard service on each</li>
+        <li>Dedicated rate negotiations</li>
+        <li>Monthly export summary report</li>
+        <li>+60 TND per extra shipment</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="font-size:13px;color:var(--ink-3);margin-top:1.5rem;">All prices in Tunisian Dinar (TND), excluding carrier fees. First shipment coordination is free for new clients.</p>
+</section>
+
+<hr class="section-divider">
+
+<!-- CONTACT -->
+<section id="contact">
+  <p class="section-label">Contact</p>
+  <h2 class="section-title">Start with a message</h2>
+
+  <div class="contact-wrap">
+    <div class="contact-info">
+      <p>Describe your shipment and I'll respond within 24 hours with a quote — or sooner on WhatsApp. No calls needed, everything works by message.</p>
+
+      <div class="contact-channels">
+        <a href="mailto:contact@sfaxexport.tn" class="channel">
+          <div class="channel-icon ch-email">
+            <svg width="16" height="16" fill="none" stroke="#1e3a6e" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          contact@sfaxexport.tn
+        </a>
+        <a href="https://wa.me/21612345678" target="_blank" class="channel">
+          <div class="channel-icon ch-wa">
+            <svg width="16" height="16" fill="#1a7a2e" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          WhatsApp: +216 12 345 678
+        </a>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <label for="name">Your name</label>
+          <input type="text" id="name" placeholder="Ahmed Ben Salem" required>
+        </div>
+        <div class="form-row">
+          <label for="email">Email or WhatsApp number</label>
+          <input type="text" id="email" placeholder="ahmed@example.com or +216 ..." required>
+        </div>
+        <div class="form-row">
+          <label for="product">What are you exporting?</label>
+          <select id="product">
+            <option value="">Select a product type</option>
+            <option>Olive oil</option>
+            <option>Seafood</option>
+            <option>Textiles & clothing</option>
+            <option>Food & agricultural products</option>
+            <option>Ceramics & crafts</option>
+            <option>Other manufactured goods</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="destination">Destination country</label>
+          <input type="text" id="destination" placeholder="France, Germany, UAE...">
+        </div>
+        <div class="form-row">
+          <label for="message">Tell me more about your shipment</label>
+          <textarea id="message" placeholder="Quantity, frequency, any specific requirements..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submit-btn">Send request</button>
+        <p class="form-note" id="form-note">I'll reply within 24 hours — usually much faster on WhatsApp.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-brand">Sfax Export</span>
+  <p>Export logistics for Tunisian producers · Sfax, Tunisia</p>
+  <p>contact@sfaxexport.tn</p>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const note = document.getElementById('form-note');
+  btn.textContent = 'Sent!';
+  btn.style.background = '#1baf7a';
+  btn.disabled = true;
+  note.textContent = 'Thanks! I will be in touch within 24 hours.';
+  note.style.color = '#1a5c3a';
+}
+</script>
+
+</body>
+</html>
